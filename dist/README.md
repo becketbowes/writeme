@@ -5,7 +5,7 @@
 
   ![](/dist/assets/img/readme/wmscreen2.jpg)
 
-  ![](/dist/assets/img/readme/wmscreen3.jpg)
+  ![](../../)
 
   ## OVERVIEW:
    A node.js README generator. This allows a quick construction of README files for any type of project. Both by prompting the user and automatically formatting the results, this makes for higher quality explanations of projects. In creating this, i found that by structuring the questions well, the consequential answers would be of higher quality..

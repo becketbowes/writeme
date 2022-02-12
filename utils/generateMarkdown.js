@@ -18,10 +18,11 @@ const licenseArrs = {
   ],
 };
 
-//write the file to the dist folder
-const writeFile = writeMe => {
+//write the file to the base of the project folder
+const writeFile = function (writeMe, projectFolder) {
   return new Promise((resolve, reject) => {
-      fs.writeFile('./dist/README.md', writeMe, err => {
+    const string = `../${projectFolder}/README.md`
+      fs.writeFile(string, writeMe, err => {
           if (err) {
               reject(err);
               return;
@@ -34,15 +35,34 @@ const writeFile = writeMe => {
   });
 };
 
+//copy functioning images to project folder
+const copyFile = function(projectFolder, file) {
+  return new Promise((resolve, reject) => {
+    const fromFile = `./assets/img/readme/${file}`;
+    const toFile = `../${projectFolder}/assets/img/readme/${file}`;
+    fs.copyFile(fromFile, toFile, err => {
+          if (err) {
+              reject(err);
+              return;
+          }
+          resolve({
+              ok: true,
+              message: 'image copied!'
+          });
+      });
+  });
+};
+
 // TODO: Create a function to generate markdown for README
 var generateMarkdown = function(data) {
   console.log('in generate Markdown function', data);
   renderLicense(data.license);
+  const projectFolder = data.localprojectfolder
   let writeMe = 
   `# ${data.title + ' '  + data.version}
-  ![${licenseType}](/assets/img/readme/${licenseBadge})
+  ![${licenseType}](./assets/img/readme/${licenseBadge})
 
-  ![${data.title} screenshot](/assets/img/readme/${data.imageone})
+  ![${data.title} screenshot](./assets/img/readme/${data.image})
 
   ## OVERVIEW:
    ${data.description + '. ' + data.motivation + '. ' + data.function + '. ' + data.education + '.'}
@@ -75,7 +95,9 @@ var generateMarkdown = function(data) {
   ## License
   [${licenseType}](${licenseLink})
 `;
-  writeFile(writeMe);
+  copyFile(projectFolder, data.image);
+  copyFile(projectFolder, licenseBadge);
+  writeFile(writeMe, projectFolder);
 }
 
 function renderToc(installation, usage, credits, tests, author) {

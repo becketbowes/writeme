@@ -24,7 +24,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'local project folder',
+        name: 'localprojectfolder',
         message: 'name of local file folder in projects'
     },
     {
