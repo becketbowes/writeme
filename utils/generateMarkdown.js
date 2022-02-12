@@ -1,5 +1,8 @@
+//add fs to be able to write file
+const fs = require('fs');
+
 const year = new Date();
-year.getFullYear();
+year.getYear();
 const licenseArrs = {
   ccAttribution: ['cc-by.png', 'https://creativecommons.org/licenses/by/4.0/legalcode', `Creative Commons Attribution License${year}`],
   ccAttributionShareAlike: ['cc-by-sa.png', 'https://creativecommons.org/licenses/by-sa/4.0/legalcode', `Creative Commons Attribution Share-Alike License${year}`],
@@ -15,33 +18,28 @@ const licenseArrs = {
   ],
 };
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicense(license) {
-  if (license) {
-    licenseBadge = licenseArrs.license[0];
-    licenseLink = licenseArrs.license[1];
-    licenseType = licenseArrs.license[2];
-  } else {
-    licenseBadge = "";
-    licenseLink = "";
-    licenseType = "";
-  };
+//write the file to the dist folder
+const writeFile = writeMe => {
+  return new Promise((resolve, reject) => {
+      fs.writeFile('./dist/README.md', writeMe, err => {
+          if (err) {
+              reject(err);
+              return;
+          }
+          resolve({
+              ok: true,
+              message: 'Written!'
+          });
+      });
+  });
 };
 
-function tableOfContents(installation, usage, credits, tests, author) {
-}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
+var generateMarkdown = function(data) {
   console.log('in generate Markdown function', data);
-  return `# ${data.title + ' '  + data.version + licenseBadge}
+  renderLicense(data.license);
+  let writeMe = 
+  `# ${data.title + ' '  + data.version + licenseBadge}
 
   ## OVERVIEW:
    ${data.description + '. ' + data.motivation + '. ' + data.function + '. ' + data.education + '.'}
@@ -72,11 +70,28 @@ function generateMarkdown(data) {
 
   ### Author(s)
   ${data.author}
+  
   Github Page(http://www.github.com/${data.github})
 
   ### License
-  ${LicenseType}(${LicenseLink})
+  ${licenseType}(${licenseLink})
 `;
+  writeFile(writeMe);
 }
+
+function renderToc(installation, usage, credits, tests, author) {
+};
+
+function renderLicense(license) {
+  if (license) {
+    licenseBadge = licenseArrs[license][0];
+    licenseLink = licenseArrs[license][1];
+    licenseType = licenseArrs[license][2];
+  } else {
+    licenseBadge = "";
+    licenseLink = "";
+    licenseType = "";
+  };
+};
 
 module.exports = generateMarkdown;

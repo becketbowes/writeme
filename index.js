@@ -103,19 +103,19 @@ const questions = [
 inquirer
   .prompt(questions)
   .then((answers) => {
-    data = (JSON.parse(answers))
-    generateMarkdown(data)
+    // console.log(answers);
+    // // var data = (JSON.parse(answers))
+    // console.log(data);
+    generateMarkdown(answers);
   })
   .catch((error) => {
     if (error.isTtyError) {
-      console.log('oh poop!');
+      console.log(error)
     } else {
-      console.log('oh neat!')
+      console.log(error)
     }
   });
 
-  
-  module.exports = data; 
 // Sample JSONparsed answers:
 // ? project title: WRITEME
 // ? version: 1.0
