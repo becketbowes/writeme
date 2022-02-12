@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 // const fs = require('fs');
 const inquirer = require('inquirer');
+const generateMarkdown = require('./utils/generateMarkdown');
 // const generate = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
@@ -35,6 +36,21 @@ const questions = [
         type: 'input',
         name: 'education',
         message: 'what did you learn?'
+    },
+    {
+        type: 'input',
+        name: 'imageone',
+        message: 'image one:'
+    },
+    {
+        type: 'input',
+        name: 'imagetwo',
+        message: 'image two:'
+    },
+    {
+        type: 'input',
+        name: 'imagethree',
+        message: 'image three:'
     },
     {
         type: 'input',
@@ -73,13 +89,13 @@ const questions = [
         name: 'license',
         message: 'license:',
         choices: [
-                    'CC_Attribution', 
-                    'CC_Attribution-ShareAlike', 
-                    'CC_Attributon-NonCommercial', 
-                    'CC_Attriubution-NonCommercial-ShareAlike', 
-                    'MIT', 
-                    'CopyLeft', 
-                    'Copyright'
+                    'ccAttribution', 
+                    'ccAttributionShareAlike', 
+                    'ccAttributonNonCommercial', 
+                    'ccAttriubutionNonCommercialShareAlike', 
+                    'mit', 
+                    'copyLeft', 
+                    'copyright'
                 ]
     }
 ];
@@ -87,7 +103,8 @@ const questions = [
 inquirer
   .prompt(questions)
   .then((answers) => {
-    console.log(JSON.parse(answers))
+    data = (JSON.parse(answers))
+    generateMarkdown(data)
   })
   .catch((error) => {
     if (error.isTtyError) {
@@ -97,6 +114,8 @@ inquirer
     }
   });
 
+  
+  module.exports = data; 
 // Sample JSONparsed answers:
 // ? project title: WRITEME
 // ? version: 1.0
