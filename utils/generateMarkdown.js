@@ -4,17 +4,17 @@ const fs = require('fs');
 const year = new Date();
 year.getYear();
 const licenseArrs = {
-  ccAttribution: ['cc-by.png', 'https://creativecommons.org/licenses/by/4.0/legalcode', `Creative Commons Attribution License${year}`],
-  ccAttributionShareAlike: ['cc-by-sa.png', 'https://creativecommons.org/licenses/by-sa/4.0/legalcode', `Creative Commons Attribution Share-Alike License${year}`],
-  ccAttributonNonCommercial: [']cc-by-nc.png', 'https://creativecommons.org/licenses/by-nc/4.0/legalcode', `Creative Commons Attribution Non-Commercial License${year}`],
-  ccAttriubutionNonCommercialShareAlike: ['cc-by-nc-sa.png', 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode', `Creative Commons Attribution Non-Commercial Share-Alike License${year}`], 
+  ccAttribution: ['cc-by.png', 'https://creativecommons.org/licenses/by/4.0/legalcode', `Creative Commons Attribution License, ${year}`],
+  ccAttributionShareAlike: ['cc-by-sa.png', 'https://creativecommons.org/licenses/by-sa/4.0/legalcode', `Creative Commons Attribution Share-Alike License, ${year}`],
+  ccAttributonNonCommercial: ['cc-by-nc.png', 'https://creativecommons.org/licenses/by-nc/4.0/legalcode', `Creative Commons Attribution Non-Commercial License, ${year}`],
+  ccAttriubutionNonCommercialShareAlike: ['cc-by-nc-sa.png', 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode', `Creative Commons Attribution Non-Commercial Share-Alike License, ${year}`], 
   mit: ['mit.svg.png', 'https://opensource.org/licenses/MIT', `MIT Open License, ${year}`],
   copyLeft: ['gnu-gpl-logo.png', 'https://www.gnu.org/licenses/gpl-3.0.html', `Gnu CopyLeft License, ${year}`],
   copyright: ['copyrightSymbol.png', 'https://en.wikipedia.org/wiki/Copyright',
   `Copyright (C) codeclast - All Rights Reserved. 
   Unauthorized copying of this file, via any medium is strictly prohibited. 
   Proprietary and confidential. 
-  Written by codeclast ${year}.`
+  Written by codeclast, ${year}.`
   ],
 };
 
@@ -39,42 +39,41 @@ var generateMarkdown = function(data) {
   console.log('in generate Markdown function', data);
   renderLicense(data.license);
   let writeMe = 
-  `# ${data.title + ' '  + data.version + licenseBadge}
+  `# ${data.title + ' '  + data.version}
+  ![${licenseType}](/assets/img/readme/${licenseBadge})
+
+  ![${data.title} screenshot](/assets/img/readme/${data.imageone})
 
   ## OVERVIEW:
    ${data.description + '. ' + data.motivation + '. ' + data.function + '. ' + data.education + '.'}
 
-  <img src="./assets/img/readme/${data.imageone}" />
-  <img src="./assets/img/readme/${data.imagetwo}" />
-  <img src="./assets/img/readme/${data.imagethree}" />
+  ## Table Of Contents:
+  [Installation](README.md#installation)<br>
+  [Usage](README.md#usage)<br>
+  [Tests](README.md#tests)<br>
+  [Credits](README.md#credits)<br>
+  [Authors](README.md#authors)<br>
+  [License](README.md#license)<br>
 
-  ## TABLE OF CONTENTS:
-  Installation(#Installation)
-  Usage(#Usage)
-  Tests(#Tests)
-  Credits(#Credits)
-  Author(#Author)
-  License(#License)
-
-  ### Installation
+  ## Installation
   ${data.installation}
 
-  ### Usage
+  ## Usage
   ${data.usage}
 
-  ### Tests
+  ## Tests
   ${data.tests}
 
-  ### Credits
+  ## Credits
   ${data.credits}
 
-  ### Author(s)
+  ## Author(s)
   ${data.author}
   
-  Github Page(http://www.github.com/${data.github})
+  [Github Page](http://www.github.com/${data.github})
 
-  ### License
-  ${licenseType}(${licenseLink})
+  ## License
+  [${licenseType}](${licenseLink})
 `;
   writeFile(writeMe);
 }

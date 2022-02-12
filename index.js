@@ -19,6 +19,16 @@ const questions = [
     },
     {
         type: 'input',
+        name: 'image',
+        message: 'formatted image name:'
+    },
+    {
+        type: 'input',
+        name: 'local project folder',
+        message: 'name of local file folder in projects'
+    },
+    {
+        type: 'input',
         name: 'description',
         message: 'project description:'
     },
@@ -36,21 +46,6 @@ const questions = [
         type: 'input',
         name: 'education',
         message: 'what did you learn?'
-    },
-    {
-        type: 'input',
-        name: 'imageone',
-        message: 'image one:'
-    },
-    {
-        type: 'input',
-        name: 'imagetwo',
-        message: 'image two:'
-    },
-    {
-        type: 'input',
-        name: 'imagethree',
-        message: 'image three:'
     },
     {
         type: 'input',
