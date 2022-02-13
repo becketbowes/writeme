@@ -1,10 +1,8 @@
-// TODO: Include packages needed for this application
-// const fs = require('fs');
+//require inquirer and the local program that writes the file
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown');
-// const generate = require('./utils/generateMarkdown.js');
 
-// TODO: Create an array of questions for user input
+//an array of questions for user input
 const questions = [
     {
         type: 'input',
@@ -80,6 +78,12 @@ const questions = [
         default: 'becketbowes'
     },
     {
+        type: 'input',
+        name: 'email',
+        message: 'email address:',
+        default: 'becketbowes@gmail.com'
+    },
+    {
         type: 'list',
         name: 'license',
         message: 'license:',
@@ -95,12 +99,10 @@ const questions = [
     }
 ];
 
+//run the questions, send call on the generateMarkdown.js file's functions to format and write it to the page
 inquirer
   .prompt(questions)
   .then((answers) => {
-    // console.log(answers);
-    // // var data = (JSON.parse(answers))
-    // console.log(data);
     generateMarkdown(answers);
   })
   .catch((error) => {
@@ -110,28 +112,3 @@ inquirer
       console.log(error)
     }
   });
-
-// Sample JSONparsed answers:
-// ? project title: WRITEME
-// ? version: 1.0
-// ? project description: node js project to complete my READMEs for me, prompting me to make more complete and professional README files.
-// ? why did you build this? I built this to help myself go through the process of making READMEs that would be worth reading.
-// ? what does it solve? It helps me to focus on explaining the app that i've made in a different way.
-// ? what did you learn? In making this app, i've learned that prompting questions in different ways changes the method of thinking that generates the answers.
-// ? table of contents: don't need this as a question.
-// ? installation notes: This has to run locally on the computer and requires several npm packages that will be listed below. 
-// ? usage notes: Once installed, this can be run at the end of every project upon completion to finish my own thought process and share it with others.
-// ? contributors and attributions: This was built entirely by me, with all credit due to the many people that wrote the modules on which this relies, Alan Turing, and all of the homies that made computers an
-// d modern society a place where i could code.
-// ? tests: this is not even running yet, so... not really anything i guess.
-// ? author: Becket, Codeclast
-// ? github username: becketbowes
-// ? license: CC_Attriubution-NonCommercial-ShareAlike
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-// function init() {}
-
-// Function call to initialize app
-// init(inquirer);

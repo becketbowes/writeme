@@ -1,24 +1,49 @@
 //add fs to be able to write file
 const fs = require('fs');
 
+//put date function in
 const year = new Date();
 year.getYear();
+
+//organizing the license images, links and titles.
 const licenseArrs = {
-  ccAttribution: ['cc-by.png', 'https://creativecommons.org/licenses/by/4.0/legalcode', `Creative Commons Attribution License, ${year}`],
-  ccAttributionShareAlike: ['cc-by-sa.png', 'https://creativecommons.org/licenses/by-sa/4.0/legalcode', `Creative Commons Attribution Share-Alike License, ${year}`],
-  ccAttributonNonCommercial: ['cc-by-nc.png', 'https://creativecommons.org/licenses/by-nc/4.0/legalcode', `Creative Commons Attribution Non-Commercial License, ${year}`],
-  ccAttriubutionNonCommercialShareAlike: ['cc-by-nc-sa.png', 'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode', `Creative Commons Attribution Non-Commercial Share-Alike License, ${year}`], 
-  mit: ['mit.svg.png', 'https://opensource.org/licenses/MIT', `MIT Open License, ${year}`],
-  copyLeft: ['gnu-gpl-logo.png', 'https://www.gnu.org/licenses/gpl-3.0.html', `Gnu CopyLeft License, ${year}`],
-  copyright: ['copyrightSymbol.png', 'https://en.wikipedia.org/wiki/Copyright',
-  `Copyright (C) codeclast - All Rights Reserved. 
-  Unauthorized copying of this file, via any medium is strictly prohibited. 
-  Proprietary and confidential. 
-  Written by codeclast, ${year}.`
+  ccAttribution: [
+    'cc-by.png', 
+    'https://creativecommons.org/licenses/by/4.0/legalcode', 
+    `Creative Commons Attribution License, ${year}`
+  ],
+  ccAttributionShareAlike: [
+    'cc-by-sa.png', 
+    'https://creativecommons.org/licenses/by-sa/4.0/legalcode', 
+    `Creative Commons Attribution Share-Alike License, ${year}`
+  ],
+  ccAttributonNonCommercial: [
+    'cc-by-nc.png', 
+    'https://creativecommons.org/licenses/by-nc/4.0/legalcode', 
+    `Creative Commons Attribution Non-Commercial License, ${year}`
+  ],
+  ccAttriubutionNonCommercialShareAlike: [
+    'cc-by-nc-sa.png', 
+    'https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode', 
+    `Creative Commons Attribution Non-Commercial Share-Alike License, ${year}`], 
+  mit: [
+    'mit.svg.png', 
+    'https://opensource.org/licenses/MIT', 
+    `MIT Open License, ${year}`],
+  copyLeft: [
+    'gnu-gpl-logo.png', 
+    'https://www.gnu.org/licenses/gpl-3.0.html', 
+    `Gnu CopyLeft License, ${year}`],
+  copyright: ['copyrightSymbol.png', 
+    'https://en.wikipedia.org/wiki/Copyright',
+    `Copyright (C) codeclast - All Rights Reserved. 
+    Unauthorized copying of this file, via any medium is strictly prohibited. 
+    Proprietary and confidential. 
+    Written by codeclast, ${year}.`
   ],
 };
 
-//write the file to the base of the project folder
+//write the file to the base of the specified project folder
 const writeFile = function (writeMe, projectFolder) {
   return new Promise((resolve, reject) => {
     const string = `../${projectFolder}/README.md`
@@ -35,7 +60,7 @@ const writeFile = function (writeMe, projectFolder) {
   });
 };
 
-//copy functioning images to project folder
+//copy functioning images to the specified project folder
 const copyFile = function(projectFolder, file) {
   return new Promise((resolve, reject) => {
     const fromFile = `./assets/img/readme/${file}`;
@@ -53,7 +78,7 @@ const copyFile = function(projectFolder, file) {
   });
 };
 
-// TODO: Create a function to generate markdown for README
+//generate the formatted text to be written to file
 var generateMarkdown = function(data) {
   console.log('in generate Markdown function', data);
   renderLicense(data.license);
@@ -72,7 +97,7 @@ var generateMarkdown = function(data) {
   [Usage](README.md#usage)<br>
   [Tests](README.md#tests)<br>
   [Credits](README.md#credits)<br>
-  [Authors](README.md#authors)<br>
+  [Questions](README.md#questions)<br>
   [License](README.md#license)<br>
 
   ## Installation
@@ -87,9 +112,8 @@ var generateMarkdown = function(data) {
   ## Credits
   ${data.credits}
 
-  ## Author(s)
-  ${data.author}
-  
+  ## Questions
+  [${data.author}](${data.email})
   [Github Page](http://www.github.com/${data.github})
 
   ## License
@@ -100,9 +124,7 @@ var generateMarkdown = function(data) {
   writeFile(writeMe, projectFolder);
 }
 
-function renderToc(installation, usage, credits, tests, author) {
-};
-
+//make the license object arrays functions with the generateMarkdown function
 function renderLicense(license) {
   if (license) {
     licenseBadge = licenseArrs[license][0];
